@@ -1,5 +1,7 @@
 #! /usr/bin/env python
 
+from __future__ import print_function
+
 import time
 import random
 import simhash
@@ -36,18 +38,18 @@ if args.queries:
 
 if args.random:
     if args.hashes and args.queries:
-        print 'Random supplied with both --hashes and --queries'
+        print('Random supplied with both --hashes and --queries')
         exit(1)
 
     if not hashes:
-        print 'Generating %i hashes' % args.random
+        print('Generating %i hashes' % args.random)
         hashes = [random.randint(0, 1 << 64) for i in range(args.random)]
 
     if not queries:
-        print 'Generating %i queries' % args.random
+        print('Generating %i queries' % args.random)
         queries = [random.randint(0, 1 << 64) for i in range(args.random)]
 elif not args.hashes or args.queries:
-    print 'No hashes or queries supplied'
+    print('No hashes or queries supplied')
     exit(2)
 
 class Timer(object):
@@ -56,15 +58,15 @@ class Timer(object):
 
     def __enter__(self):
         self.start = -time.time()
-        print 'Starting %s' % self.name
+        print('Starting %s' % self.name)
         return self
 
     def __exit__(self, t, v, tb):
         self.start += time.time()
         if t:
-            print '  Failed %s in %fs' % (self.name, self.start)
+            print('  Failed %s in %fs' % (self.name, self.start))
         else:
-            print '     Ran %s in %fs' % (self.name, self.start)
+            print('     Ran %s in %fs' % (self.name, self.start))
 
 with Timer('Bulk Insertion'):
     corpus.insert_bulk(hashes)

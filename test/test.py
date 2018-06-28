@@ -120,7 +120,7 @@ class TestHash(unittest.TestCase):
     def test_negative_numbers(self):
         # We should be able to hash on negative numbers. In not throwing an
         # exception, this test passes
-        simhash.hash_fp(range(-10, 10))
+        simhash.hash_fp(list(range(-10, 10)))
 
 
 class TestSimhash(unittest.TestCase):
@@ -195,7 +195,7 @@ class TestSimhash(unittest.TestCase):
     def test_get_all(self):
         # We should also be able to get a list of all the hashes that are in
         # the corpus
-        inputs = range(1000)
+        inputs = list(range(1000))
         self.corpus.insert_bulk(inputs)
         self.assertEqual(self.corpus.hashes(), inputs)
 
